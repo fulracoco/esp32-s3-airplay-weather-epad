@@ -1,0 +1,22 @@
+# USB Audio Class host output: use the ESP32-S2/S3/P4 USB OTG port to
+# send AirPlay audio to an external UAC 1.0 USB DAC. Layer this after the
+# board defaults, for example:
+#   idf.py -DSDKCONFIG_DEFAULTS="config/sdkconfig.defaults;config/sdkconfig.defaults.esp32s3;config/sdkconfig.defaults.usb-host" build
+
+CONFIG_AUDIO_OUTPUT_USB_HOST=y
+
+# Use the lossless AirPlay 1/RAOP ALAC path for stable seeking.  This avoids
+# advertising AirPlay 2 AAC-ELD, which is not supported by the bundled AAC
+# decoder.
+CONFIG_AIRPLAY_FORCE_V1=y
+
+# Composite USB headsets often expose speaker, microphone, HID, and control
+# interfaces in one configuration descriptor. Match Espressif's UAC host
+# audio-player example so enumeration is not limited by the 256-byte default.
+CONFIG_USB_HOST_CONTROL_TRANSFER_MAX_SIZE=2048
+
+# USB audio playback uses an isochronous OUT endpoint. Some composite USB-C
+# headsets advertise a 384-byte maximum packet size, which exceeds the
+# balanced FIFO layout. The periodic-OUT layout supports packets up to 600
+# bytes on ESP32-S3 and matches Espressif's UAC host test configuration.
+CONFIG_USB_HOST_HW_BUFFER_BIAS_PERIODIC_OUT=y

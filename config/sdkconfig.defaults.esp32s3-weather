@@ -1,0 +1,37 @@
+# Fusion profile: ESP32-S3-N16R8 + GDEY075Z08 + BME280 + PCM5102A.
+# Layer on top of sdkconfig.defaults and sdkconfig.defaults.esp32s3.
+CONFIG_BOARD_ESP32S3_GENERIC=y
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+CONFIG_SPIRAM_MODE_OCT=y
+
+# Keep AirPlay and DLNA services enabled; select USB Host UAC when present.
+CONFIG_AUDIO_OUTPUT_USB_HOST=y
+CONFIG_AIRPLAY_FORCE_V1=y
+CONFIG_USB_HOST_CONTROL_TRANSFER_MAX_SIZE=2048
+CONFIG_USB_HOST_HW_BUFFER_BIAS_PERIODIC_OUT=y
+
+# Keep I2S away from the e-paper SPI bus (GPIO 11/12/13) and BME280 SDA
+# (GPIO8). The legacy PCM5102A mapping is documented in 硬件接线定义.md.
+CONFIG_I2S_SCK_IO=41
+CONFIG_I2S_BCK_IO=38
+CONFIG_I2S_WS_IO=39
+CONFIG_I2S_DO_IO=40
+
+# Weather EPD pin map is in components/weather_epd/include/weather_epd_config.h.
+CONFIG_ESP_INSIGHTS_ENABLED=n
+# Build the source project's GxEPD2/U8g2 renderer through the Arduino-ESP32
+# compatibility component.  Its setup/loop and network code are not included.
+CONFIG_WEATHER_EPD_ARDUINO_RENDERER=y
+CONFIG_WEATHER_PM1502A_ENABLED=n
+# Arduino NetworkClientSecure requires the PSK cipher-suite options enabled so
+# the holiday client can link its TLS implementation.
+CONFIG_MBEDTLS_PSK_MODES=y
+CONFIG_MBEDTLS_KEY_EXCHANGE_PSK=y
+
+# Calendar photos are uploaded through the Wi-Fi web server.  Do not enable
+# NimBLE here: the BLE host/controller consumes internal RAM permanently and
+# competes with the RTSP and e-paper tasks.
+CONFIG_BT_ENABLED=n
+CONFIG_BT_NIMBLE_ENABLED=n
+CONFIG_BT_BLE_ENABLED=n

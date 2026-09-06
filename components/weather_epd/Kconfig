@@ -1,0 +1,23 @@
+menu "Weather E-Paper"
+
+config WEATHER_EPD_ARDUINO_RENDERER
+    bool "Enable Arduino display renderer bridge"
+    default n
+    help
+        Enables the Arduino-ESP32 compatibility layer used by the renderer
+        snapshot under arduino_port/. Keep disabled until GxEPD2, Adafruit
+        GFX, U8g2_for_Adafruit_GFX, and Nongli are available to the build.
+
+config WEATHER_EPD_REFRESH_INTERVAL_MIN
+    int "Display refresh interval (minutes)"
+    range 2 1440
+    default 10
+
+config WEATHER_PM1502A_ENABLED
+    bool "Enable PM1502A particulate sensor"
+    default n
+    help
+        Enable the optional PM1502A UART sensor on GPIO5 (RX) and GPIO4 (TX).
+        Leave disabled when the module is not fitted.
+
+endmenu

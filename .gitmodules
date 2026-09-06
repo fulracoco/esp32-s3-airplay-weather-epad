@@ -1,0 +1,6 @@
+[submodule "components/u8g2"]
+	path = components/u8g2
+	url = https://github.com/olikraus/u8g2.git
+[submodule "components/weather_epd/arduino_port/lib/Nongli"]
+	path = components/weather_epd/arduino_port/lib/Nongli
+	url = https://github.com/JADE-Jerry/nongli.git
