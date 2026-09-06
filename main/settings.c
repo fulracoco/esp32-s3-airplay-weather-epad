@@ -45,11 +45,9 @@ static bool g_bt_volume_loaded = false;
 static float g_eq_gains[SETTINGS_EQ_BANDS];
 static bool g_eq_loaded = false;
 
-#ifdef CONFIG_AUDIO_OUTPUT_USB_HOST
-static uint8_t g_output_backend = 1;
-#else
+/* The weather firmware contains both backends and starts with I2S selected.
+ * Users can switch to USB Host DAC from the Web UI. */
 static uint8_t g_output_backend = 0;
-#endif
 
 esp_err_t settings_init(void) {
   // Load volume on init

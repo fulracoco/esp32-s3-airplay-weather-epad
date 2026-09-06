@@ -87,7 +87,7 @@ git clone --recursive https://github.com/fulracoco/esp32-s3-airplay-weather-epad
 cd esp32-s3-airplay-weather-epad
 ```
 
-### I²S DAC 版本
+### 唯一构建环境：ESP32-S3-N16R8
 
 ```bash
 pio run -e esp32s3-weather -t upload
@@ -95,23 +95,17 @@ pio run -e esp32s3-weather -t uploadfs   # 写入 Web 配置页面和 SPIFFS 数
 pio run -e esp32s3-weather -t monitor
 ```
 
-### USB Host DAC 版本
-
-```bash
-pio run -e esp32s3-weather-usb-host -t upload
-pio run -e esp32s3-weather-usb-host -t uploadfs
-pio run -e esp32s3-weather-usb-host -t monitor
-```
-
-两个环境都只针对 ESP32-S3-N16R8。修改 `config/` 默认值后，请删除根目录缓存的
-`sdkconfig.<env>` 再重新构建。
+I²S DAC 和 USB Host UAC DAC 都包含在这个固件中。首次启动默认为 I²S DAC；在
+Web 页面选择 `I2S DAC` 或 `USB Host DAC` 后，设备会保存设置并自动重启，重启后
+使用所选输出。修改 `config/` 默认值后，请删除根目录缓存的 `sdkconfig.<env>`
+再重新构建。
 
 ## 首次配置
 
 首次启动后连接设备创建的配置 Wi-Fi，打开设备提示的 Web 地址，配置：
 
 1. Wi-Fi 和设备名称；
-2. 音频输出（I²S DAC 或 USB Host DAC）；
+2. 音频输出（I²S DAC 或 USB Host DAC，页面切换）；
 3. 城市、经纬度和 OpenWeatherMap API Key；
 4. 时区、NTP、天气刷新间隔和节假日接口。
 

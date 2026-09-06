@@ -34,11 +34,9 @@ extern uint32_t audio_output_usb_host_get_underruns(void);
 
 static const char *TAG = "audio_output";
 
-#ifdef CONFIG_AUDIO_OUTPUT_USB_HOST
-static audio_output_backend_t s_backend = AUDIO_OUTPUT_BACKEND_USB_HOST;
-#else
+/* Both I2S and USB Host backends are linked in the weather profile. Keep I2S
+ * as the factory default; the Web UI can persistently select USB Host. */
 static audio_output_backend_t s_backend = AUDIO_OUTPUT_BACKEND_I2S;
-#endif
 static bool s_initialized;
 static volatile bool s_direct_mode;
 /* Keep the normal I2S producer alive while a direct source is preparing its
