@@ -26,8 +26,9 @@ Default ESP32-S3-N16R8 wiring (copied from the weather project):
 
 The legacy PCM5102A wiring used BCK=GPIO11, DIN=GPIO12, LCK/LRCK=GPIO13,
 SCK=GPIO8, which overlaps the e-paper and BME280 bus. The unified profile now
-uses GPIO 38/40/39/41 (BCLK/DOUT/LRCLK/MCLK) to avoid conflicts; USB Host output is
-selected with the `esp32s3-weather-usb-host` PlatformIO environment.
+uses GPIO 38/40/39/41 (BCLK/DOUT/LRCLK/MCLK) to avoid conflicts; the base
+`esp32s3-weather` environment uses this I²S output, while USB Host output is selected
+with the `esp32s3-weather-usb-host` PlatformIO environment.
 
 The current component provides the board bring-up path and scheduling API. The
 GDEY waveform/LUT and sensor calibration tables should be validated against the

@@ -5,8 +5,8 @@ CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
 CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
 CONFIG_SPIRAM_MODE_OCT=y
 
-# Keep AirPlay and DLNA services enabled; select USB Host UAC when present.
-CONFIG_AUDIO_OUTPUT_USB_HOST=y
+# Keep AirPlay and DLNA services enabled. The base weather profile uses the
+# external I2S DAC; layer sdkconfig.defaults.usb-host for USB DAC output.
 CONFIG_AIRPLAY_FORCE_V1=y
 CONFIG_USB_HOST_CONTROL_TRANSFER_MAX_SIZE=2048
 CONFIG_USB_HOST_HW_BUFFER_BIAS_PERIODIC_OUT=y
