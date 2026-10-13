@@ -1,0 +1,5 @@
+# Native UC8179/GDEY075Z08 validation profile.
+# Inherit the complete weather hardware profile, but exercise the ESP-IDF
+# spi_master renderer instead of the Arduino/GxEPD2 bridge.
+CONFIG_WEATHER_EPD_ARDUINO_RENDERER=n
+CONFIG_WEATHER_EPD_WAIT_FOR_NETWORK=n
